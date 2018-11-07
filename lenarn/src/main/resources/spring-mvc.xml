@@ -15,7 +15,7 @@
     <!-- 扫描controller（controller层注入） -->
    <context:component-scan base-package="com.shijia.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+   </context:component-scan>
    
      <mvc:annotation-driven />
 

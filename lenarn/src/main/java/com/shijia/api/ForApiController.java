@@ -14,4 +14,10 @@ public class ForApiController {
 		
 		return null;
 	}
+	
+	@RequestMapping(value="/RSA")
+	public UserDao RSATest(){
+		
+		return null;
+	}
 }

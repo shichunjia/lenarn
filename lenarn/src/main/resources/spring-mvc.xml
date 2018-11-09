@@ -13,13 +13,41 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
      
     <!-- 扫描controller（controller层注入） -->
-   <context:component-scan base-package="com.shijia.controller" use-default-filters="false">
+    <context:component-scan base-package="com.shijia.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-   </context:component-scan>
+    </context:component-scan>
    
-     <mvc:annotation-driven />
+    <context:component-scan base-package="com.shijia.service" />
+    <mvc:annotation-driven />
 
-      <!-- 内容协商管理器  -->
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件,启动Spring MVC的注解功能,设置编码方式，防止乱码 -->
+	<!--    解决访问地址 返回json对象报错    后台对象直接再页面显示   -->  <!-- 依赖Jackson.jar -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="false">
+			<bean
+				class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- MultipartResolver 用于处理文件上传    参考地址：https://www.cnblogs.com/tengyunhao/p/7670293.html -->
+	 <!-- 依赖commons-fileupload-1.3.3.jar  -->
+   	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize" value="10485760000"></property>
+		<property name="maxInMemorySize" value="40960"></property>
+	</bean>
+	
+	
+	
+    <!-- 内容协商管理器  -->
     <!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header-->
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
@@ -44,13 +72,14 @@
 
     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
     <mvc:default-servlet-handler />  
+    
     <!-- 静态资源映射 -->
-    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
+    <!-- <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/> -->
+    <!-- 静态资源过滤 -->
+	<mvc:resources mapping="/resource/**" location="/resource/" />
+    
    
-
    <!-- 对模型视图添加前后缀 -->
      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-      p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
-      
-
+      p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
 </beans>

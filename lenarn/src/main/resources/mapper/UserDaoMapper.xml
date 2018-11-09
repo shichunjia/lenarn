@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 区域 -->
+<mapper namespace="com.shijia.dao.UserDao">
+
+	 <select id="getUserById" resultType="UserDto" parameterType="java.util.Map">
+	    SELECT u.userId AS id,u.userName AS userName,u.userPwd AS password FROM sys_users u where userId=${id};
+	</select>
+</mapper>

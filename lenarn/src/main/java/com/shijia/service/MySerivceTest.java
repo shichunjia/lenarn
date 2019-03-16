@@ -1,11 +1,14 @@
 package com.shijia.service;
 
+import com.shijia.dao.UserDao;
 import com.shijia.pojo.UserDto;
 
 public interface MySerivceTest {
 	
-	public UserDto getUser();
+	 UserDto getUser();
 	
-	public UserDto getUserById();
+	 UserDto getUserById();
+
+	UserDto getUserByNum(int id);
 	
 }

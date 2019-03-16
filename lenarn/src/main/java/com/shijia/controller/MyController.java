@@ -36,4 +36,12 @@ public class MyController {
 		log.info("数据库查询用户开始");
 		return myservice.getUserById();
 	}
+
+	@ResponseBody
+	@RequestMapping(value="/c")
+	public UserDto  getUserByNum() {
+		log.info("根据ID查下用户");
+		int a=1001;
+		return myservice.getUserByNum(a);
+	}
 }

@@ -17,7 +17,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-
+    <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
 	<!-- 加载配置文件 jdbc.properties  util方式引入需要 添加http地址 -->
 	<util:properties id="dataSourceProps"
 		location="classpath:jdbc.properties" />

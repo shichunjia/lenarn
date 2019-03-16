@@ -7,4 +7,8 @@
 	 <select id="getUserById" resultType="UserDto" parameterType="java.util.Map">
 	    SELECT u.userId AS id,u.userName AS userName,u.userPwd AS password FROM sys_users u where userId=${id};
 	</select>
+
+	<select id="getUserByNum" resultType="UserDto" parameterType="java.lang.Integer">
+	    SELECT u.userId AS id,u.userName AS userName,u.userPwd AS password FROM sys_users u where userId=${id};
+	</select>
 </mapper>

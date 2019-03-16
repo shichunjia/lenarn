@@ -6,5 +6,7 @@ import com.shijia.pojo.UserDto;
 
 public interface UserDao {
 	
-	public UserDto getUserById(Map<String ,String> map);
+	UserDto getUserById(Map<String ,String> map);
+
+	UserDto getUserByNum(int id);
 }

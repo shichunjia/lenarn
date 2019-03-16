@@ -30,7 +30,10 @@ public class MySerivceTestImpl implements MySerivceTest{
 		map.put("id", "1563");
 		return userDao.getUserById(map);
 	}
-	
+
+	public UserDto getUserByNum(int id) {
+		return userDao.getUserByNum(id);
+	}
 	
 
 }
